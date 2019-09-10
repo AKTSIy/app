@@ -5,9 +5,10 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>掲示板</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/bootstrap.css'.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/style.css'.css'>
-    
+    <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/bootstrap.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/style.css'>
+    <!-- cssが適用されないのは何故？ -->
+    <!-- 4．スレッドを立てられるようにしたい -->
     <script src='main.js'></script>
 </head>
 <body>
@@ -20,21 +21,25 @@
     </div>
     <!-- 3．ヘッダー -->
     <!-- 2．表示される欄 -->
-    <div>
-        <h1 class="a">スレッド名</h1>
+    <div class="container">
+        <div class="row">
+            <h1 class="col-4"></h1>
+            <h1 class="col-4">スレッド名</h1>
+            <h1 class="col-4"></h1>
+        </div>
     </div>
 
     <!-- 1．入力する欄 -->
     <form method="POST" action="index.php">
-        <div>
-            ニックネーム<br>
-            <input type="text" name="nickname">
-        </div>
-        <div>
-            内容<br>
-            <textarea name="content"></textarea>
-        </div>
-        <input type="submit" value="送信">
+    <div>
+        ニックネーム<br>
+        <input type="text" name="nickname">
+    </div>
+    <div>
+        内容<br>
+        <textarea name="content"></textarea>
+    </div>
+    <input type="submit" value="送信">
     </form>
     <!-- 3．フッター -->
 </body>
