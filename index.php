@@ -42,31 +42,10 @@
 
 require_once('assets/assets/dbconnect.php');
 
-
-$nickname = '';//何これ？下のif文の中出でしか定義していない。検索が実行されていない時も$nicknameを定義している。
-if (isset($_GET['nickname'])) {//isset？（イズセット受動態）。検索が実行された場合は、（'nickname'がGET(代入)されたら）｛｝を実行する。isset()の()の中があるとき、1を返す。
-	$nickname = $_GET['nickname'];
-}
-
-$content = '';//何これ？下のif文の中出でしか定義していない。検索が実行されていない時も$nicknameを定義している。
-if (isset($_GET['content'])) {//isset？（イズセット受動態）。検索が実行された場合は、（'nickname'がGET(代入)されたら）｛｝を実行する。isset()の()の中があるとき、1を返す。
-	$content = $_GET['content'];
-}
-// $nickname = $_POST['nickname'];
-// $content = $_POST['content'];
-//全てのレコードをDBからもってきて、表示させたい。
-$stmt = $dbh->prepare('select * FROM apuri WHERE nickname like ?');
-$stmt2 = $dbh->prepare('select * FROM apuri WHERE content like ?');
-$stmt->execute(["%nickname%"]);
-$stmt2->execute(["%content%"]);
+//SQLを実行
+$stmt = $dbh->prepare('SELECT * FROM apuri');
+$stmt->execute();
 $results = $stmt->fetchAll();
-$results2 = $stmt2->fetchAll();
-
-// echo 'ニックネーム' . '<br>'. $nickname . '<br>';
-// echo '内容' . '<br>' . $content;
-
-$stmt = $dbh->prepare('INSERT INTO apuri (nickname, content) VALUES (?, ?)');
-$stmt->execute([$nickname, $content]);//?を変数に置き換えてSQLを実行
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -74,16 +53,13 @@ $stmt->execute([$nickname, $content]);//?を変数に置き換えてSQLを実行
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>掲示板</title>
 </head>
 <body>
-    <?php foreach($results as $v ): ?>
-        <p><?php echo $v['nickname'] ?></p>
+    <?php foreach ($results as $result): ?>
+        <p><?php echo 'ニックネーム' . '<br>' . $result['nickname']; ?></p>
+        <p><?php echo '内容' . '<br>' . $result['content']; ?></p>
     <?php endforeach; ?>
-    <?php foreach($results2 as $c ): ?>
-        <p><?php echo $c['content'] ?></p>
-    <?php endforeach; ?>
-
-    
 </body>
 </html>
+
