@@ -6,6 +6,8 @@
     <title>掲示板</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/bootstrap.css'.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/style.css'.css'>
+    
     <script src='main.js'></script>
 </head>
 <body>
@@ -18,8 +20,9 @@
     </div>
     <!-- 3．ヘッダー -->
     <!-- 2．表示される欄 -->
-    <h1>スレッド名</h1>
-    
+    <div>
+        <h1 class="a">スレッド名</h1>
+    </div>
 
     <!-- 1．入力する欄 -->
     <form method="POST" action="index.php">
@@ -42,7 +45,15 @@
 
 require_once('assets/assets/dbconnect.php');
 
-//SQLを実行
+//データ保存
+$nickname = $_POST['nickname'];
+$content = $_POST['content'];
+
+$stmt = $dbh->prepare('INSERT INTO apuri (nickname, content) VALUES (?, ?)');
+$stmt->execute([$nickname, $content]);
+
+
+//SQLを実行,データの一覧表示
 $stmt = $dbh->prepare('SELECT * FROM apuri');
 $stmt->execute();
 $results = $stmt->fetchAll();
