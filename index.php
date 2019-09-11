@@ -4,22 +4,7 @@
 
 require_once('assets/assets/dbconnect.php');
 
-//データ保存
-// 初めてページを表示したときの変数未定義エラーを消す。
 
-if($_POST['nickname'] == NULL ) {//これはだめなの？エラーが出る。$_POSTを宣言した時点でundefindが出てしまう。
-    $nickname = '';
-} else {
-    $nickname = $_POST['nickname'];
-}
-if($_POST['content'] == NULL ) {
-    $content = '';
-} else {
-    $content = $_POST['content'];
-}
-
-$stmt = $dbh->prepare('INSERT INTO apuri (nickname, content) VALUES (?, ?)');
-$stmt->execute([$nickname, $content]);
 
 
 //SQLを実行,データの一覧表示
@@ -62,8 +47,8 @@ $results = $stmt->fetchAll();
     </div>
     </form>
     <?php foreach ($results as $result): ?>
-        <p><?php echo 'ニックネーム' . '<br>' . $result['nickname']; ?></p>
-        <p><?php echo '内容' . '<br>' . $result['content']; ?></p>
+        <p class="center"><?php echo 'ニックネーム' . '<br>' . $result['nickname']; ?></p>
+        <p class="center"><?php echo '内容' . '<br>' . $result['content']; ?></p>
     <?php endforeach; ?>
     <!-- 3．フッター -->
 </body>
