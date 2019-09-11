@@ -1,4 +1,12 @@
-.a {
+h2 {
+    color: aqua;
+}
+.center {
+    /* margin: 0px 30%; */
+    /* margin: 0 auto; */
     text-align: center;
-    color: red;
+}
+.yoko {
+    width: 100%;
+    height: 100px;
 }
