@@ -57,7 +57,9 @@ $results = $stmt->fetchAll();
         内容<br>
         <textarea name="content" class="yoko"></textarea>
     </div>
-    <input type="submit" value="送信" class="btn_center">
+    <div class="center">
+        <input type="submit" value="送信">
+    </div>
     </form>
     <?php foreach ($results as $result): ?>
         <p><?php echo 'ニックネーム' . '<br>' . $result['nickname']; ?></p>
