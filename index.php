@@ -26,6 +26,11 @@ require_once('assets/assets/dbconnect.php');
     <body>
         <!-- <div class="row"> -->
         <h2 class="center">タイトル</h2>
+        <!-- <div> -->
+        <form action="new_thread.php">
+            <input type="submit" value="新しいスレッドを建てる">
+        </form>
+        <!-- </div> -->
         <!-- </div> -->
         <h1 class="center">スレッド名</h1>
         <!-- 1．入力する欄 -->
