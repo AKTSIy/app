@@ -3,7 +3,7 @@
     <?php
     require_once('assets/assets/dbconnect.php');
     //SQLを実行,データの一覧表示
-    $stmt = $dbh->prepare('SELECT * FROM apuri');
+    $stmt = $dbh->prepare('SELECT * FROM thread_contents');
     $stmt->execute();
     $results = $stmt->fetchAll();
 
@@ -48,6 +48,7 @@
                 内容<br>
                 <textarea name="content" class="yoko"></textarea>
             </div>
+            <input type="hidden" value="1">
             <div class="center">
                 <input type="submit" value="送信">
             </div>
