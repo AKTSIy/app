@@ -1,11 +1,16 @@
     <!-- 2．表示される欄 -->
 
-<?php
-require_once('assets/assets/dbconnect.php');
+    <?php
+    require_once('assets/assets/dbconnect.php');
     //SQLを実行,データの一覧表示
     $stmt = $dbh->prepare('SELECT * FROM apuri');
     $stmt->execute();
     $results = $stmt->fetchAll();
+
+    $stmt1 = $dbh->prepare('SELECT * FROM threads');
+    $stmt1->execute();
+    $results1 = $stmt1->fetchAll();
+
     ?>
 
     <!DOCTYPE html>
@@ -50,8 +55,17 @@ require_once('assets/assets/dbconnect.php');
         <?php foreach ($results as $result) : ?>
             <p class="center"><?php echo 'ニックネーム' . '<br>' . $result['nickname']; ?></p>
             <p class="center"><?php echo '内容' . '<br>' . $result['content']; ?></p>
+            <!-- ?id はてなの後ろにはゲットで送りたいもの -->
         <?php endforeach; ?>
         <!-- 3．フッター -->
+        <!-- スレッドの一覧を表示させる -->
+        <?php foreach ($results1 as $result1) : ?>
+            <!-- <p class="center"></p> -->
+            <div class="center">
+                <a href="create.php?id=<?php echo $result['id']  ?>"><?php echo $result1['name']; ?></a>
+            </div>
+        <?php endforeach; ?>
+        <!-- urlの後ろの？はGETで初めて確定する -->
     </body>
 
     </html>

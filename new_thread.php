@@ -22,7 +22,7 @@ require_once('assets/assets/dbconnect.php');
     <form method="POST" action="submit2.php">
         <div class="center">
             <h2>スレッド名</h2><br>
-            <input type="text" name="thread_name" class=yoko1>
+            <input type="text" name="thread_name" class=yoko>
         </div>
         <div class="center">
             <input type="submit" value="スレッドをたてる">
