@@ -14,4 +14,4 @@ $thread_id = $_POST['thread_id'];// create.phpでthread.phpがとれてない。
 $stmt = $dbh->prepare('INSERT INTO thread_contents (nickname, content, datetime, thread_id) VALUES (?, ?, ?, ?)');
 $stmt->execute([$nickname, $content, $datetime, $thread_id]);
 
-header('Location: index.php');
+header('Location: create.php');
