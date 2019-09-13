@@ -61,7 +61,8 @@ $thread_id = $_GET['id']; // ？以下でidを選択したから$_GETでidが送
             内容<br>
             <textarea name="content" class="yoko"></textarea>
         </div>
-        <input type="hidden" value="<?php echo $thread_id ?>">
+        <input type="hidden" value="<?php echo $thread_id ?>" name="thread_id">
+        <!-- textなどの内容はいつもvalueで入っている。 -->
         <div class="center">
             <input type="submit" value="送信">
         </div>
