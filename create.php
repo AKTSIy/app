@@ -4,18 +4,16 @@ thread_id = threadsのid の形
 
 threadsからデータを所得。 -->
 <?php
+require_once('assets/assets/dbconnect.php');
+
+$stmt = $dbh->prepare('SELECT * FROM thread_contents');
+$stmt->execute();
+$results = $stmt->fetchAll();
+
 $thread_id = $_GET['id']; // ？以下でidを選択したから$_GETでidが送られてくる。それを代入。
 
 // threadid が0のまま
 // datetimeが00000？－＞date()で自動的に時間をとれる。
-
-
-
-
-
-
-
-
 
 // $stmt = $dbh->prepare('SELECT * FROM thread_contents');
 // $stmt->execute();
@@ -25,7 +23,15 @@ $thread_id = $_GET['id']; // ？以下でidを選択したから$_GETでidが送
 //     $thread_id['thread_id'];
 // }
 
+// $stmt = $dbh->prepare('SELECT * FROM thread_contents WHERE thread_id = $thread_id '); // ここでエラーが出てしまう。$thread_idが見つからない？GETで送られてきてるはずだけど
+// $stmt->execute();
+// $results = $stmt->fetchAll();
+
+
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +43,15 @@ $thread_id = $_GET['id']; // ？以下でidを選択したから$_GETでidが送
 </head>
 
 <body>
+    <!-- スレッドの詳細を表示 -->
+    <!-- indexから送られてきたthreaad_idと一致するレコードのデータを一覧表示する -->
+
+    <?php foreach ($results as $result) : ?>
+        <p class="center"><?php echo 'ニックネーム' . '<br>' . $result['nickname']; ?></p>
+        <p class="center"><?php echo '内容' . '<br>' . $result['content']; ?></p>
+        <p class="center"><?php echo '日付' . '<br>' . $result['datetime']; ?></p>
+    <?php endforeach; ?>
+    <!-- スレッドを表示している中に書き込むことで、そのすれidを受け取ることができる -->
     <form method="POST" action="submit.php">
         <div class="center">
             ニックネーム<br>

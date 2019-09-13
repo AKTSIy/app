@@ -14,6 +14,11 @@ $options = [//オプションはデータベースの細かい設定を書いて
     PDO::ATTR_EMULATE_PREPARES   => false, //SQLインジェクション対策
 ];
 
+$host = getenv(HOST_NAME);
+$dbname = getenv(DB_NAME);
+$password = getenv(PASSWORD);
+$user = getenv(USER_NAME);
+
 //DBへの接続設定
 $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";//ここやばくね？$dsnは Data Source Nameでデータソースの名前。
 //$dsnにみぎの””内をすべて代入する。””内に全く余白がないのは一体感を出すため。
