@@ -11,7 +11,10 @@ $thread_id2 = (int)$thread_id2;//整数化完了
 
 $nickname = $_POST['nickname'];
 $content = $_POST['content'];
+date_default_timezone_set('Asia/Tokyo');
 $datetime = date('Y/m/d H:m:s');
+// echo date_default_timezone_get();
+// echo date('Y/m/d H:m:s');
 $thread_id = $_POST['thread_id'];// create.phpでthread.phpがとれてない。
 // var_dump($thread_id);
 

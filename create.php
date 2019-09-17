@@ -7,7 +7,7 @@ threadsからデータを所得。 -->
 require_once('assets/assets/dbconnect.php');
 $thread_id = $_GET['id']; // ？以下でidを選択したから$_GETでスレッドの固有idがindex.phpから送られてくる。それを代入。次は
 //$thread_id = intval($thread_id);整数化成功
-$thread_id = (int)$thread_id;//整数化成功
+$thread_id = (int) $thread_id; //整数化成功
 //var_dump($thread_id);//stringで受け取っている。ここはintegerで受けとるべき。なぜstringになった？indexの中ではinteger型だったけど、こっちに送られてからはstringとvardumされている。
 $stmt = $dbh->prepare("SELECT * FROM thread_contents WHERE thread_id = $thread_id");
 $stmt->execute();
@@ -53,6 +53,9 @@ $results1 = $stmt1->fetchAll();
     <!-- スレッドの詳細を表示 -->
     <!-- indexから送られてきたthreaad_idと一致するレコードのデータを一覧表示する -->
     <!-- #endregion -->
+    <form action="index.php">
+        <input type="submit" value="スレッド一覧ページへ">
+    </form>
     <?php foreach ($results1 as $result1) : ?>
         <h1 class="center"><?php echo $result1['name']; ?></h1>
     <?php endforeach; ?>
@@ -64,7 +67,8 @@ $results1 = $stmt1->fetchAll();
     <?php endforeach; ?>
     <?php foreach ($results1 as $result1) : ?>
         <form method="POST" action="submit.php?id=<?php echo $result1['id']; ?>">
-            <!-- <div><?php// var_dump($result1); ?></div> ここで既にidがとれていない。-->
+            <!-- <div><? php // var_dump($result1); 
+                            ?></div> ここで既にidがとれていない。-->
             <!-- ここでthreadの固有idをsubmitに送って、submitから持ってくる。 -->
             <div class="center">
                 ニックネーム<br>
