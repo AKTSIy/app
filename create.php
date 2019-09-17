@@ -5,12 +5,14 @@ thread_id = threadsのid の形
 threadsからデータを所得。 -->
 <?php
 require_once('assets/assets/dbconnect.php');
-
-$stmt = $dbh->prepare('SELECT * FROM thread_contents');
+$thread_id = $_GET['id']; // ？以下でidを選択したから$_GETでスレッドの固有idがindex.phpから送られてくる。それを代入。次は
+//$thread_id = intval($thread_id);整数化成功
+$thread_id = (int)$thread_id;//整数化成功
+//var_dump($thread_id);//stringで受け取っている。ここはintegerで受けとるべき。なぜstringになった？indexの中ではinteger型だったけど、こっちに送られてからはstringとvardumされている。
+$stmt = $dbh->prepare("SELECT * FROM thread_contents WHERE thread_id = $thread_id");
 $stmt->execute();
 $results = $stmt->fetchAll();
 
-$thread_id = $_GET['id']; // ？以下でidを選択したから$_GETでidがindex.phpから送られてくる。それを代入。
 
 $stmt1 = $dbh->prepare("SELECT * FROM threads WHERE id = $thread_id");
 $stmt1->execute();
@@ -58,23 +60,27 @@ $results1 = $stmt1->fetchAll();
         <p class="center"><?php echo 'ニックネーム' . '<br>' . $result['nickname']; ?></p>
         <p class="center"><?php echo '内容' . '<br>' . $result['content']; ?></p>
         <p class="center"><?php echo '日付' . '<br>' . $result['datetime']; ?></p>
+        <!-- スレッドを表示している中に書き込むことで、そのすれidを受け取ることができる -->
     <?php endforeach; ?>
-    <!-- スレッドを表示している中に書き込むことで、そのすれidを受け取ることができる -->
-    <form method="POST" action="submit.php">
-        <div class="center">
-            ニックネーム<br>
-            <input type="text" name="nickname">
-        </div>
-        <div class="center">
-            内容<br>
-            <textarea name="content" class="yoko"></textarea>
-        </div>
-        <input type="hidden" value="<?php echo $thread_id ?>" name="thread_id">
-        <!-- textなどの内容はいつもvalueで入っている。 -->
-        <div class="center">
-            <input type="submit" value="送信">
-        </div>
-    </form>
+    <?php foreach ($results1 as $result1) : ?>
+        <form method="POST" action="submit.php?id=<?php echo $result1['id']; ?>">
+            <!-- <div><?php// var_dump($result1); ?></div> ここで既にidがとれていない。-->
+            <!-- ここでthreadの固有idをsubmitに送って、submitから持ってくる。 -->
+            <div class="center">
+                ニックネーム<br>
+                <input type="text" name="nickname">
+            </div>
+            <div class="center">
+                内容<br>
+                <textarea name="content" class="yoko"></textarea>
+            </div>
+            <input type="hidden" value="<?php echo $thread_id ?>" name="thread_id">
+            <!-- textなどの内容はいつもvalueで入っている。 -->
+            <div class="center">
+                <input type="submit" value="送信">
+            </div>
+        </form>
+    <?php endforeach; ?>
 </body>
 
 </html>

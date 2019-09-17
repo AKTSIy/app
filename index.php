@@ -64,6 +64,7 @@
             <!-- <p class="center"></p> -->
             <div class="center">
                 <a href="create.php?id=<?php echo $result1['id'] ?>"><?php echo $result1['name']; ?></a>
+                <!-- <div><?php// var_dump($result1); ?></div>ここではきちんとintegerでidがとれている。 -->
                 <!-- ?id はてなの後ろにはゲットで送りたいもの -->
                 <!-- create.phpにスレのidを送る -->
             </div>
