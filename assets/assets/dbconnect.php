@@ -14,7 +14,7 @@ $options = [//オプションはデータベースの細かい設定を書いて
     PDO::ATTR_EMULATE_PREPARES   => false, //SQLインジェクション対策
 ];
 
-$host = getenv('HOST_NAME');
+$host = getenv('HOST_NAME');//公開用にDB接続先を変えている。
 $dbname = getenv('DB_NAME');
 $password = getenv('PASSWORD');
 $user = getenv('USER_NAME');

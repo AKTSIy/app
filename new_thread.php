@@ -18,7 +18,7 @@ require_once('assets/assets/dbconnect.php');
 
     <title>スレッドをたてる</title>
 </head>
-<body>
+<body class= "brown">
     <form method="POST" action="submit2.php">
         <div class="center">
             <h2>スレッド名</h2><br>

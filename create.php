@@ -45,24 +45,25 @@ $results1 = $stmt1->fetchAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/bootstrap.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/style.css'>
     <title>Document</title>
 </head>
 
-<body>
+<body class= "brown">
     <!-- スレッドの詳細を表示 -->
     <!-- indexから送られてきたthreaad_idと一致するレコードのデータを一覧表示する -->
     <!-- #endregion -->
-    <form action="index.php">
-        <input type="submit" value="スレッド一覧ページへ">
-    </form>
     <?php foreach ($results1 as $result1) : ?>
         <h1 class="center"><?php echo $result1['name']; ?></h1>
     <?php endforeach; ?>
+    <form action="index.php">
+        <button type="submit" class="btn btn-outline-danger">スレッド一覧ページへ</button>
+    </form>
     <?php foreach ($results as $result) : ?>
-        <p class="center"><?php echo 'ニックネーム' . '<br>' . $result['nickname']; ?></p>
+        <p class="center"><?php echo 'ニックネーム:' . $result['nickname'] .'　'. $result['datetime'];?></p>
         <p class="center"><?php echo '内容' . '<br>' . $result['content']; ?></p>
-        <p class="center"><?php echo '日付' . '<br>' . $result['datetime']; ?></p>
+
         <!-- スレッドを表示している中に書き込むことで、そのすれidを受け取ることができる -->
     <?php endforeach; ?>
     <?php foreach ($results1 as $result1) : ?>
