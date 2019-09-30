@@ -20,4 +20,4 @@ $stmt1->execute([$thread_name]);
 // $stmt2 = $dbh->prepare('INSERT INTO thread_contents (threadcontent, threadid) VALUES (?, ?)');
 // $stmt2->execute([$thread_content, $thread_id]);
 
-header('LOcation: index.php');
+header('Location: index.php');

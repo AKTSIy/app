@@ -9,7 +9,7 @@ $thread_id2 = (int)$thread_id2;//整数化完了
 //データ保存
 // 初めてページを表示したときの変数未定義エラーを消す。
 
-$nickname = $_POST['nickname'];
+// $nickname = $_POST['nickname'];...ニックネームを消して、ユーザー名を表示させる。
 $content = $_POST['content'];
 date_default_timezone_set('Asia/Tokyo');
 $datetime = date('Y/m/d H:m:s');
@@ -18,8 +18,8 @@ $datetime = date('Y/m/d H:m:s');
 $thread_id = $_POST['thread_id'];// create.phpでthread.phpがとれてない。
 // var_dump($thread_id);
 
-$stmt = $dbh->prepare('INSERT INTO thread_contents (nickname, content, datetime, thread_id) VALUES (?, ?, ?, ?)');
-$stmt->execute([$nickname, $content, $datetime, $thread_id]);
+$stmt = $dbh->prepare('INSERT INTO thread_contents (content, datetime, thread_id, user_id) VALUES (?, ?, ?, ?)');
+$stmt->execute([$content, $datetime, $thread_id, $user_id]);//user_idをとってこなくてはいけない
 
 // $stmt1 = $dbh->prepare('SELECT * FROM threads');
 // $stmt1->execute();
