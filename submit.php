@@ -4,7 +4,8 @@ require_once('assets/assets/dbconnect.php');
 $thread_id2 = $_GET['id']; // ？以下でidを選択したから$_GETでスレッドの固有idがcreate.phpから送られてくる。それを代入。
 $thread_id2 = (int)$thread_id2;//整数化完了
 //var_dump($thread_id2);//idが未定義で、thread_id2の中身はnull。つまりidがcreate.phpから送られてきていない。
-
+$user_id = $_GET['user_id'];
+$user_id = (int)$user_id;
 
 //データ保存
 // 初めてページを表示したときの変数未定義エラーを消す。
@@ -18,7 +19,7 @@ $datetime = date('Y/m/d H:m:s');
 $thread_id = $_POST['thread_id'];// create.phpでthread.phpがとれてない。
 // var_dump($thread_id);
 
-$stmt = $dbh->prepare('INSERT INTO thread_contents (content, datetime, thread_id, user_id) VALUES (?, ?, ?, ?)');
+$stmt = $dbh->prepare('INSERT INTO thread_contents (content, datetime, thread_id, userid) VALUES (?, ?, ?, ?)');
 $stmt->execute([$content, $datetime, $thread_id, $user_id]);//user_idをとってこなくてはいけない
 
 // $stmt1 = $dbh->prepare('SELECT * FROM threads');
@@ -27,6 +28,6 @@ $stmt->execute([$content, $datetime, $thread_id, $user_id]);//user_idをとっ�
     // foreach($results1 as $result) {
 //     header("Location: create.php?=$result[id] ");//スレッドidは取れたから、createで受け取るだけ。ほんとにとれたのかわからない
 // }
-header("Location: create.php?id=$thread_id2");// create.phpにスレッド固有idを返したい。thread_id2に値がとれていない。
+header("Location: create.php?id=$thread_id2&user_id=$user_id");// create.phpにスレッド固有idを返したい。thread_id2に値がとれていない。
 // スレッドの内容を表示するだけのファイルにしたほうがいい。
 // なぜなら、headerに余計な値を交錯してしまうと混乱してしまうから。

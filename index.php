@@ -1,7 +1,11 @@
-    <!-- 2．表示される欄 -->
+    <!-- スレッド名の一覧が表示されるページ -->
 
     <?php
     require_once('assets/assets/dbconnect.php');
+
+    $user_id = $_GET['user_id']; //submit_login.phpで取ってきたuser_idを変数に固定
+    $user_id = (int) $user_id; //整数化しておく
+
     //SQLを実行,データの一覧表示
     $stmt = $dbh->prepare('SELECT * FROM thread_contents');
     $stmt->execute();
@@ -23,8 +27,6 @@
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/bootstrap.css'>
         <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/style.css'>
-        <!-- cssが適用されないのは何故？...キャッシュが残ってたから -->
-        <!-- 4．スレッドを立てられるようにしたい -->
         <script src='main.js'></script>
     </head>
 
@@ -35,52 +37,16 @@
                 <!-- <input type="submit" value="新しいスレッドを建てる" > -->
                 <button type="submit" class="btn btn-outline-info">新しいスレッドを建てる</button>
             </form>
-            <form class="padding" action="user_registration.php">
-                <button type="submit" class="btn btn-outline-info">ユーザー登録</button>
-            </form>
         </header>
-        <!-- <div class="row"> -->
         <h2 class="center">掲示板</h2>
-        <!-- <div> -->
-
-        <!-- </div> -->
-        <!-- </div> -->
         <h1 class="center">スレッド一覧</h1>
-        <!-- 1．入力する欄 -->
-        <!-- <form method="POST" action="submit.php">.........メインページに内容入力はいらない。
-            <div class="center">
-                ニックネーム<br>
-                <input type="text" name="nickname">
-            </div>
-            <div class="center">
-                内容<br>
-                <textarea name="content" class="yoko"></textarea>
-            </div>
-            <input type="hidden" name="thread_id" value="<?php //echo $result['id']  
-                                                            ?>">
-            スレッドの内容を送るために送信ボタンを押したとき、submitにvalueの値を送る。valueの値がスレidじゃないと意味が無い
-            <div class="center">
-                <input type="submit" value="送信">
-            </div>
-        </form> -->
-        <!-- <?php //foreach ($results as $result) : 
-                ?>.....................メインページにコンテンツ内容は表示しない。
-            <p class="center"><? php // echo 'ニックネーム' . '<br>' . $result['nickname']; 
-                                ?></p>
-            <p class="center"><? php // echo '内容' . '<br>' . $result['content']; 
-                                ?></p>
-        <?php //endforeach; 
-        ?> -->
-        <!-- 3．フッター -->
+
         <!-- スレッドの一覧を表示させる -->
         <?php foreach ($results1 as $result1) : ?>
-            <!-- <p class="center"></p> -->
             <div class="center padding">
-                <a href="create.php?id=<?php echo $result1['id'] ?>"><?php echo $result1['name']; ?></a>
-                <!-- <div><? php // var_dump($result1); 
-                                ?></div>ここではきちんとintegerでidがとれている。 -->
-                <!-- ?id はてなの後ろにはゲットで送りたいもの -->
-                <!-- create.phpにスレのidを送る -->
+                <a href="create.php?id=<?php echo $result1['id']; ?>&user_id=<?php echo $user_id; ?> "><?php echo $result1['name']; ?></a>
+                <!-- 上のURLのイメージとしては、create.php?id=スレッドのid＆?user_id=ユーザーのid として、スレッドidとユーザーのidの２つを
+                        create.phpにおくりたい。-->
             </div>
         <?php endforeach; ?>
         <!-- urlの後ろの？はGETで初めて確定する -->

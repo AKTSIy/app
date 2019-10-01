@@ -18,5 +18,8 @@ h2 {
     float: left;
 }
 .kogecha{
-    background-color: rgb(187, 78, 78)
+    background-color: rgb(187, 78, 78);
+}
+header {
+    height: 60px;
 }
