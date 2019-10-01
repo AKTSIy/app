@@ -19,8 +19,18 @@ $datetime = date('Y/m/d H:m:s');
 $thread_id = $_POST['thread_id'];// create.phpでthread.phpがとれてない。
 // var_dump($thread_id);
 
-$stmt = $dbh->prepare('INSERT INTO thread_contents (content, datetime, thread_id, userid) VALUES (?, ?, ?, ?)');
-$stmt->execute([$content, $datetime, $thread_id, $user_id]);//user_idをとってこなくてはいけない
+//ここでユーザーネームを代入して、thread_contentsに保存していきたい。
+$stmt = $dbh->prepare("SELECT name FROM user_registration WHERE id = $user_id");
+$stmt->execute();
+$results = $stmt->fetchAll();
+foreach ($results as $result){
+    $name = $result['name'];
+}
+ 
+
+
+$stmt = $dbh->prepare('INSERT INTO thread_contents (content, datetime, thread_id, userid, name) VALUES (?, ?, ?, ?, ?)');
+$stmt->execute([$content, $datetime, $thread_id, $user_id, $name]);//user_idをとってこなくてはいけない
 
 // $stmt1 = $dbh->prepare('SELECT * FROM threads');
 // $stmt1->execute();

@@ -18,9 +18,9 @@ $results1 = $stmt1->fetchAll();
 $user_id = $_GET['user_id']; //user_idとしてnameをつけられたデータがここに入る。ここで仮に１を代入してみるときちんとユーザー名まで表示される。
 //だから、ユーザーidをどうやってここまで持ってくるか考える。
 
-$stmt2 = $dbh->prepare("SELECT name FROM user_registration WHERE id = $user_id"); //user_idを送信してこないとシンタックスエラーになる
-$stmt2->execute();
-$results2 = $stmt2->fetchAll();
+// $stmt2 = $dbh->prepare("SELECT name FROM user_registration WHERE id = $user_id"); //user_idを送信してこないとシンタックスエラーになる
+// $stmt2->execute();
+// $results2 = $stmt2->fetchAll();
 
 // threadid が0のまま
 // datetimeが00000？－＞date()で自動的に時間をとれる。
@@ -66,13 +66,14 @@ $results2 = $stmt2->fetchAll();
         <button type="submit" class="btn btn-outline-danger">スレッド一覧ページへ</button>
     </form>
     <!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーここのforeachが２つになってるから交互に表示されないーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
-    <?php foreach ($results2 as $result2) : ?>
-        <p class="center"><?php echo 'ユーザー名' . $result2['name']; ?></p>
-        <!--ユーザー名の表示をしたい-->
-    <?php endforeach; ?>
+    <!-- <?php// foreach ($results2 as $result2) : ?>
+        <p class="center"><?php// echo 'ユーザー名' . $result2['name']; ?></p>
+        //ユーザー名の表示をしたい
+    <?php// endforeach; ?> -->
 
     <?php foreach ($results as $result) : ?>
-        <p class="center"><?php echo $result['datetime']; ?></p>
+
+        <p class="center"><?php echo 'ユーザー名：' . $result['name'] . '　' . $result['datetime']; ?></p>
         <!--日付の表示 -->
         <p class="center"><?php echo '内容' . '<br>' . $result['content']; ?></p>
         <!--内容と内容の表示 -->
