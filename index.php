@@ -2,9 +2,9 @@
 
     <?php
     require_once('assets/assets/dbconnect.php');
-
-    $user_id = $_GET['user_id']; //submit_login.phpで取ってきたuser_idを変数に固定
-    $user_id = (int) $user_id; //整数化しておく
+    // var_dump($_GET['user_id']);
+    // die;//user_idが定義されてないから、$_GETの結果はNULLになっている。
+    $user_id = $_GET['user_id']; //submit_login.phpで取ってきたuser_idを変数に固定//そもそもcreate.phpから届いていない。この文字列は正しい。
 
     //SQLを実行,データの一覧表示
     $stmt = $dbh->prepare('SELECT * FROM thread_contents');

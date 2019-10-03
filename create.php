@@ -16,6 +16,7 @@ $stmt1->execute();
 $results1 = $stmt1->fetchAll();
 
 $user_id = $_GET['user_id']; //user_idとしてnameをつけられたデータがここに入る。ここで仮に１を代入してみるときちんとユーザー名まで表示される。
+$user_id = (int)$user_id;
 //だから、ユーザーidをどうやってここまで持ってくるか考える。
 
 // $stmt2 = $dbh->prepare("SELECT name FROM user_registration WHERE id = $user_id"); //user_idを送信してこないとシンタックスエラーになる
@@ -62,14 +63,15 @@ $user_id = $_GET['user_id']; //user_idとしてnameをつけられたデータ�
         <h1 class="center"><?php echo $result1['name']; ?></h1>
         <!--スレッド名の表示 -->
     <?php endforeach; ?>
-    <form action="index.php">
+    <?php //var_dump($user_id); die;?><!-- １が表示できてる -->
+    <form action="index.php?user_id=<?php echo $user_id; ?>">
         <button type="submit" class="btn btn-outline-danger">スレッド一覧ページへ</button>
     </form>
     <!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーここのforeachが２つになってるから交互に表示されないーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
     <!-- <?php// foreach ($results2 as $result2) : ?>
         <p class="center"><?php// echo 'ユーザー名' . $result2['name']; ?></p>
         //ユーザー名の表示をしたい
-    <?php// endforeach; ?> -->
+        <?php// endforeach; ?> -->
 
     <?php foreach ($results as $result) : ?>
 
