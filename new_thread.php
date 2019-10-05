@@ -7,14 +7,18 @@
 
 require_once('assets/assets/dbconnect.php');
 //まずhtmlから始める。htmlで必要な物をそろえて、それを使ってDBを作っていく
+
+$user_id = $_GET['user_id'];
+$user_id = (int)$user_id;
 ?>
 <!DOCTYPE html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/bootstrap.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/style.css'>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/style.css'>
 
     <title>スレッドをたてる</title>
 </head>
@@ -27,9 +31,7 @@ require_once('assets/assets/dbconnect.php');
         <div class="center">
             <input type="submit" value="スレッドをたてる">
         </div>
-
-
-
+        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
     </form>
 </body>
 </html>

@@ -5,7 +5,6 @@
     // var_dump($_GET['user_id']);
     // die;//user_idが定義されてないから、$_GETの結果はNULLになっている。
     $user_id = $_GET['user_id']; //submit_login.phpで取ってきたuser_idを変数に固定//そもそもcreate.phpから届いていない。この文字列は正しい。
-
     //SQLを実行,データの一覧表示
     $stmt = $dbh->prepare('SELECT * FROM thread_contents');
     $stmt->execute();
@@ -32,9 +31,10 @@
 
     <body class="brown">
         <header class="kogecha">
+            <!-- <a href="new_thread.php?user_id=<?php// echo $user_id; ?> ">新しいスレッドを建てる</a> -->
+
             <form class="left padding" action="new_thread.php">
-                <!-- actionタグはsubmitさえあれば問題なし -->
-                <!-- <input type="submit" value="新しいスレッドを建てる" > -->
+                <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" >
                 <button type="submit" class="btn btn-outline-info">新しいスレッドを建てる</button>
             </form>
         </header>

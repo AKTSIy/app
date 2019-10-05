@@ -5,11 +5,15 @@ h2 {
     text-align: center;
 }
 .yoko {
-    width: 100%;
+    width: 98.5%;
+    /* ディスプレイの横がこのPCで1340ぐらい？ */
     height: 100px;
 }
 .padding{
     padding: 10px;
+}
+.margin{
+    margin: 10px;
 }
 .brown{
     background-color: burlywood

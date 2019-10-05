@@ -40,7 +40,6 @@ $user_id = (int)$user_id;
 
 // スレッド名を表示させたい。
 
-
 ?>
 
 <!DOCTYPE html>
@@ -64,8 +63,12 @@ $user_id = (int)$user_id;
         <!--スレッド名の表示 -->
     <?php endforeach; ?>
     <?php //var_dump($user_id); die;?><!-- １が表示できてる -->
-    <form action="index.php?user_id=<?php echo $user_id; ?>">
+    <!-- methodをPOSTでないと送れない可能性...失敗 -->
+    <!-- <a href="index.php?user_id=<?php echo $user_id; ?> ">スレッド一覧ページへ</a> -->
+
+    <form action="index.php">
         <button type="submit" class="btn btn-outline-danger">スレッド一覧ページへ</button>
+        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
     </form>
     <!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーここのforeachが２つになってるから交互に表示されないーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
     <!-- <?php// foreach ($results2 as $result2) : ?>
@@ -76,15 +79,25 @@ $user_id = (int)$user_id;
     <?php foreach ($results as $result) : ?>
 
         <p class="center"><?php echo 'ユーザー名：' . $result['name'] . '　' . $result['datetime']; ?></p>
-        <!--日付の表示 -->
         <p class="center"><?php echo '内容' . '<br>' . $result['content']; ?></p>
-        <!--内容と内容の表示 -->
-        <!-- スレッドを表示している中に書き込むことで、そのすれidを受け取ることができる -->
+        <p><?php if ($result['userid'] = $user_id) :?>
+                <form action="edit.php" class="center">
+                    <button type="submit" class="btn btn-outline-info">編集する</button>
+                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+                    <input type="hidden" name="text" value="<?php echo $result['content'] ?>">
+                    <input type="hidden" name="id" value="<?php echo $result['id']; ?>">
+                    <input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>">
+                </form>
+            <?php endif; ?>
+
     <?php endforeach; ?>
     <!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
     <?php foreach ($results1 as $result1) : ?>
         <form method="POST" action="submit.php?id=<?php echo $result1['id']; ?>&user_id=<?php echo $user_id; ?>">
             <!-- urlでスレッドidを送っている、hiddenとかぶってる？ -->
+            <!-- なぜここだけPOSTで送っていいるのか？ -->
+            <!-- idとuser_id、thread_idはPOSTで送信されるのではないのか？
+                    url の後ろにあるやつはGETで送信されて、heddunはformに囲われているからPOSTで送信されてる。 -->
             <!-- <div class="center">...ニックネームを消して、ユーザー名を表示させる。
                 ニックネーム<br>
                 <input type="text" name="nickname">...ここのデータ送信が消える訳だから、submit.phpを修正する。
