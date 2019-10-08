@@ -1,12 +1,8 @@
 <?php
 //DBに接続
-//DBの接続設定があいまい
 //ここはdbconnectじゃなくて新規作成？多分そう。dbconnectはただ、first_appと接続しているだけ。
-//dbconnectをいち行ずつ日本語訳してみる
-//削除機能もあったらいい
 
 require_once('assets/assets/dbconnect.php');
-//まずhtmlから始める。htmlで必要な物をそろえて、それを使ってDBを作っていく
 
 $user_id = $_GET['user_id'];
 $user_id = (int)$user_id;
@@ -23,6 +19,16 @@ $user_id = (int)$user_id;
     <title>スレッドをたてる</title>
 </head>
 <body class= "brown">
+    <header class="kogecha">
+        <form class="left padding" action="index.php">
+            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" >
+            <button type="submit" class="btn btn-outline-light">スレッド一覧ページに戻る</button>
+        </form>
+    </header>
+
+
+
+
     <form method="POST" action="submit2.php">
         <div class="center">
             <h2>スレッド名</h2><br>

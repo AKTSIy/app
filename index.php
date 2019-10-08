@@ -45,12 +45,12 @@
 
             <form class="left padding" action="new_thread.php">
                 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" >
-                <button type="submit" class="btn btn-outline-info">新しいスレッドを建てる</button>
+                <button type="submit" class="btn btn-outline-light">新しいスレッドを建てる</button>
             </form>
 
             <form class="left padding" action="user_info.php">
                 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" >
-                <button type="submit" class="btn btn-outline-info">ユーザー情報</button>
+                <button type="submit" class="btn btn-outline-light">ユーザー情報</button>
             </form>
         </header>
         <h2 class="center">掲示板</h2>

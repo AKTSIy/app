@@ -23,6 +23,13 @@ $results1 = $stmt1->fetchAll();
     <title>ユーザー情報</title>
 </head>
 <body class="brown">
+    <header class="kogecha">
+        <form class="left padding" action="index.php">
+            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" >
+            <button type="submit" class="btn btn-outline-light">スレッド一覧ページに戻る</button>
+        </form>
+    </header>
+
     <table border="1" class="center2">
         <tr>
             <td>ユーザー名</td>
