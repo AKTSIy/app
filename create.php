@@ -1,6 +1,7 @@
 <!-- このページでスレッドに内容を表示したい -->
 
 <?php
+// error_reporting(0);
 require_once('assets/assets/dbconnect.php');
 $thread_id = $_GET['id']; // ？以下でidを選択したから$_GETでスレッドの固有idがindex.phpから送られてくる。それを代入。次は
 //$thread_id = intval($thread_id);整数化成功
@@ -17,30 +18,17 @@ $results1 = $stmt1->fetchAll();
 
 $user_id = $_GET['user_id']; //user_idとしてnameをつけられたデータがここに入る。ここで仮に１を代入してみるときちんとユーザー名まで表示される。
 $user_id = (int)$user_id;
-//だから、ユーザーidをどうやってここまで持ってくるか考える。
-
-// $stmt2 = $dbh->prepare("SELECT name FROM user_registration WHERE id = $user_id"); //user_idを送信してこないとシンタックスエラーになる
-// $stmt2->execute();
-// $results2 = $stmt2->fetchAll();
-
-// threadid が0のまま
-// datetimeが00000？－＞date()で自動的に時間をとれる。
-
-// $stmt = $dbh->prepare('SELECT * FROM thread_contents');
-// $stmt->execute();
-// $results = $stmt->fetchAll();
-
-// foreach ($results as $thread_id) {
-//     $thread_id['thread_id'];
+// var_dump(isset($_GET['success']));die;
+if (isset($_GET['success'])) {
+    $success = $_GET['success'];   
+}
+// $success = if isset($_GET['success']) != false  ? '' : $_GET['success']
+// var_dump($success);die;
+// if (isset($_GET['success'])) {
+//     echo $success;   
 // }
-
-// $stmt = $dbh->prepare('SELECT * FROM thread_contents WHERE thread_id = $thread_id '); // ここでエラーが出てしまう。$thread_idが見つからない？GETで送られてきてるはずだけど
-// $stmt->execute();
-// $results = $stmt->fetchAll();
-
-// スレッド名を表示させたい。
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -57,24 +45,28 @@ $user_id = (int)$user_id;
 <body class="brown">
     <!-- スレッドの詳細を表示 -->
     <!-- indexから送られてきたthreaad_idと一致するレコードのデータを一覧表示する -->
-    <!-- #endregion -->
+    <header class="kogecha">
+        <div class="flex">
+            <form action="index.php" class="margin">
+                <button type="submit" class="btn btn-outline-light">スレッド一覧ページへ</button>
+                <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+            </form>
+            <form action="submit_bookmark.php" class="margin">
+                <input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" >
+                <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+                <button type="submit" class="btn btn-outline-light">ブックマークする</button>
+            </form>
+        </div>
+    </header>
+
+    <?php if (isset($_GET['success'])) :?>
+    <p class="shita"><?php echo $success; ?></p>
+    <?php endif;?>
+
     <?php foreach ($results1 as $result1) : ?>
         <h1 class="center"><?php echo $result1['name']; ?></h1>
         <!--スレッド名の表示 -->
     <?php endforeach; ?>
-    <?php //var_dump($user_id); die;?><!-- １が表示できてる -->
-    <!-- methodをPOSTでないと送れない可能性...失敗 -->
-    <!-- <a href="index.php?user_id=<?php echo $user_id; ?> ">スレッド一覧ページへ</a> -->
-
-    <form action="index.php">
-        <button type="submit" class="btn btn-outline-danger">スレッド一覧ページへ</button>
-        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-    </form>
-    <!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーここのforeachが２つになってるから交互に表示されないーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
-    <!-- <?php// foreach ($results2 as $result2) : ?>
-        <p class="center"><?php// echo 'ユーザー名' . $result2['name']; ?></p>
-        //ユーザー名の表示をしたい
-        <?php// endforeach; ?> -->
 
     <?php foreach ($results as $result) : ?>
 

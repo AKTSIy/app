@@ -37,6 +37,11 @@
                 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" >
                 <button type="submit" class="btn btn-outline-info">新しいスレッドを建てる</button>
             </form>
+
+            <form class="left padding" action="user_info.php">
+                <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" >
+                <button type="submit" class="btn btn-outline-info">ユーザー情報</button>
+            </form>
         </header>
         <h2 class="center">掲示板</h2>
         <h1 class="center">スレッド一覧</h1>
@@ -45,12 +50,9 @@
         <?php foreach ($results1 as $result1) : ?>
             <div class="center padding">
                 <a href="create.php?id=<?php echo $result1['id']; ?>&user_id=<?php echo $user_id; ?> "><?php echo $result1['name']; ?></a>
-                <!-- 上のURLのイメージとしては、create.php?id=スレッドのid＆?user_id=ユーザーのid として、スレッドidとユーザーのidの２つを
-                        create.phpにおくりたい。-->
             </div>
         <?php endforeach; ?>
-        <!-- urlの後ろの？はGETで初めて確定する -->
+
     </body>
 
     </html>
-    <!-- スレッドidが送信されてない -->

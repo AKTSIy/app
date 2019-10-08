@@ -4,6 +4,9 @@ h2 {
 .center {
     text-align: center;
 }
+.center2 {
+    margin: 0 auto;
+}
 .yoko {
     width: 98.5%;
     /* ディスプレイの横がこのPCで1340ぐらい？ */
@@ -18,12 +21,24 @@ h2 {
 .brown{
     background-color: burlywood
 }
+.red{
+    color: red;
+}
 .left{
     float: left;
+}
+.right{
+    float: right;
 }
 .kogecha{
     background-color: rgb(187, 78, 78);
 }
 header {
     height: 60px;
+}
+.flex{
+    display: flex;
+}
+.shita{
+    margin: 0px 0px 0px 215px
 }

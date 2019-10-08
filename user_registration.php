@@ -19,6 +19,8 @@ require_once('assets/assets/dbconnect.php');
         <div class="center">
             ニックネーム<br>
             <input type="text" name="user_name">
+            <br>パスワード(4桁の数字)<br>
+            <input type="text" name="password"><br>
             <input type="submit" class="btn btn-outline-info" value="登録する">
         </div>
     </form>

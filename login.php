@@ -1,5 +1,6 @@
 <?php
 require_once('assets/assets/dbconnect.php');
+$caution=$_GET['caution'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,12 +14,16 @@ require_once('assets/assets/dbconnect.php');
     <title>ログイン</title>
 </head>
 
-<body>
+<body class="brown">
     <h1>ご利用にはログインしていただく必要がございます</h1>
+    <p class="red"><?php echo $caution;?></p>
     ユーザー名<br>
-    <form action="submit_login.php">
-        <input type="textarea" name="user_name">
-        <input type="submit" value="送信">
+    <form method="POST" action="submit_login.php">
+    <!-- <form method="POST" action="submit_login.php"> -->
+        <input type="text" name="user_name"><br>
+        パスワード<br>
+        <input type="text" name="password">
+        <input type="submit" value="ログイン">
     </form>
     <h3>新規登録はこちら</h3>
     <form class="padding" action="user_registration.php">
