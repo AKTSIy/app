@@ -16,3 +16,4 @@ $stmt = $dbh->prepare('INSERT INTO bookmark (thread_id, user_id, name) VALUES (?
 $stmt->execute([$thread_id, $user_id, $thread_name]);
 
     header("Location: create.php?success=ブックマークしました&id=$thread_id&user_id=$user_id");//idとuser_idをおくる
+

@@ -13,6 +13,16 @@
     $stmt1 = $dbh->prepare('SELECT * FROM threads');
     $stmt1->execute();
     $results1 = $stmt1->fetchAll();
+    if (isset($_GET['name'])) {
+        $name = $_GET['name'];
+    }else{
+        $name ='';
+    }
+    $stmt2 = $dbh->prepare('SELECT * FROM threads WHERE name LIKE ?');
+    $stmt2->execute(["%$name%"]);
+    $results2 = $stmt2->fetchAll();
+
+
 
     ?>
 
@@ -44,6 +54,21 @@
             </form>
         </header>
         <h2 class="center">掲示板</h2>
+
+        <form action="index.php" method="GET">
+            <p class="center">検索したいスレッド名を入力してください</p>
+            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" >
+            <div class="center">
+                <input type=text name="name">
+                <input type=submit value="検索">
+            </div>
+        </form>
+        <?php foreach ($results2 as $result2 ) : ?>
+            <div class="center padding">
+                <a href="create.php?id=<?php echo $result2['id']; ?>&user_id=<?php echo $user_id; ?> "><?php echo $result2['name']; ?></a>
+            </div>
+        <?php endforeach ;?>
+
         <h1 class="center">スレッド一覧</h1>
 
         <!-- スレッドの一覧を表示させる -->
