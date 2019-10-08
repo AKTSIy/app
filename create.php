@@ -7,6 +7,8 @@ $thread_id = $_GET['id']; // ？以下でidを選択したから$_GETでスレ�
 //$thread_id = intval($thread_id);整数化成功
 $thread_id = (int) $thread_id; //整数化成功
 //var_dump($thread_id);//stringで受け取っている。ここはintegerで受けとるべき。なぜstringになった？indexの中ではinteger型だったけど、こっちに送られてからはstringとvardumされている。
+$user_id = $_GET['user_id']; //user_idとしてnameをつけられたデータがここに入る。ここで仮に１を代入してみるときちんとユーザー名まで表示される。
+$user_id = (int)$user_id;
 
 $stmt = $dbh->prepare("SELECT * FROM thread_contents WHERE thread_id = $thread_id");
 $stmt->execute();
@@ -16,8 +18,14 @@ $stmt1 = $dbh->prepare("SELECT * FROM threads WHERE id = $thread_id");
 $stmt1->execute();
 $results1 = $stmt1->fetchAll();
 
-$user_id = $_GET['user_id']; //user_idとしてnameをつけられたデータがここに入る。ここで仮に１を代入してみるときちんとユーザー名まで表示される。
-$user_id = (int)$user_id;
+$stmt2 = $dbh->prepare("SELECT * FROM bookmark WHERE user_id = '$user_id' AND thread_id = '$thread_id' ");//ここの''忘れがち。
+$stmt2->execute();
+$results2 = $stmt2->fetchAll();
+foreach ($results2 as $result2) {
+    $already = $result2['thread_id'];
+}
+
+
 // var_dump(isset($_GET['success']));die;
 if (isset($_GET['success'])) {
     $success = $_GET['success'];   
@@ -51,7 +59,8 @@ if (isset($_GET['success'])) {
                 <button type="submit" class="btn btn-outline-light">スレッド一覧ページへ</button>
                 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
             </form>
-            <?php if (ブックマークがあれば) :?>
+            
+            <?php if (isset($already)) :?>
                 <form action="submit_unset_bookmark.php" class="margin">
                     <input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" >
                     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
@@ -63,7 +72,7 @@ if (isset($_GET['success'])) {
                     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                     <button type="submit" class="btn btn-outline-light">ブックマークする</button>
                 </form>
-            z<?php endif; ?>
+            <?php endif; ?>
             
         </div>
     </header>
