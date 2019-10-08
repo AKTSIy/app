@@ -7,9 +7,9 @@ $stmt = $dbh->prepare("SELECT * FROM user_registration WHERE id = $user_id");
 $stmt->execute();
 $results = $stmt->fetchAll();
 
-
-
-
+$stmt1 = $dbh->prepare("SELECT * FROM bookmark WHERE user_id = $user_id");
+$stmt1->execute();
+$results1 = $stmt1->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -22,7 +22,7 @@ $results = $stmt->fetchAll();
     <link rel='stylesheet' type='text/css' media='screen' href='assets/assets/style.css'>
     <title>ユーザー情報</title>
 </head>
-<body>
+<body class="brown">
     <table border="1" class="center2">
         <tr>
             <td>ユーザー名</td>
@@ -39,8 +39,13 @@ $results = $stmt->fetchAll();
         </tr>
     </table>
     <div>
-        <p>ブックマーク一覧</p>
+        <p class="center margin-top">ブックマーク一覧</p>
 
+        <?php foreach ($results1 as $result1) : ?>
+            <div class="center padding">
+                <a href="create.php?id=<?php echo $result1['thread_id']; ?>&user_id=<?php echo $user_id; ?> "><?php echo $result1['name']; ?></a>
+            </div>
+        <?php endforeach; ?>
     </div>    
 
 </body>

@@ -51,16 +51,25 @@ if (isset($_GET['success'])) {
                 <button type="submit" class="btn btn-outline-light">スレッド一覧ページへ</button>
                 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
             </form>
-            <form action="submit_bookmark.php" class="margin">
-                <input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" >
-                <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-                <button type="submit" class="btn btn-outline-light">ブックマークする</button>
-            </form>
+            <?php if (ブックマークがあれば) :?>
+                <form action="submit_unset_bookmark.php" class="margin">
+                    <input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" >
+                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+                    <button type="submit" class="btn btn-outline-light">ブックマーク解除</button>
+                </form>
+            <?php else: ?>
+                <form action="submit_bookmark.php" class="margin">
+                    <input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" >
+                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+                    <button type="submit" class="btn btn-outline-light">ブックマークする</button>
+                </form>
+            z<?php endif; ?>
+            
         </div>
     </header>
 
     <?php if (isset($_GET['success'])) :?>
-    <p class="shita"><?php echo $success; ?></p>
+    <p class=shita><?php echo $success; ?></p>
     <?php endif;?>
 
     <?php foreach ($results1 as $result1) : ?>
@@ -85,21 +94,13 @@ if (isset($_GET['success'])) {
     <?php endforeach; ?>
     <!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
     <?php foreach ($results1 as $result1) : ?>
-        <form method="POST" action="submit.php?id=<?php echo $result1['id']; ?>&user_id=<?php echo $user_id; ?>">
-            <!-- urlでスレッドidを送っている、hiddenとかぶってる？ -->
-            <!-- なぜここだけPOSTで送っていいるのか？ -->
-            <!-- idとuser_id、thread_idはPOSTで送信されるのではないのか？
-                    url の後ろにあるやつはGETで送信されて、heddunはformに囲われているからPOSTで送信されてる。 -->
-            <!-- <div class="center">...ニックネームを消して、ユーザー名を表示させる。
-                ニックネーム<br>
-                <input type="text" name="nickname">...ここのデータ送信が消える訳だから、submit.phpを修正する。
-            </div> -->
+        <form method="POST" action="submit.php?user_id=<?php echo $user_id; ?>">
+           <!-- ここhiddenじゃなくてもおくられてる謎 -->
             <div class="center">
                 内容<br>
                 <textarea name="content" class="yoko"></textarea>
             </div>
-            <input type="hidden" value="<?php echo $thread_id ?>" name="thread_id"><!-- index.phpから送られてきたidをvalueに代入してる-->
-            <!-- textなどの内容はいつもvalueで入っている。 -->
+            <input type="hidden" value="<?php echo $thread_id ?>" name="thread_id">
             <div class="center">
                 <input type="submit" value="送信">
             </div>

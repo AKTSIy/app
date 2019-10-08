@@ -40,5 +40,8 @@ header {
     display: flex;
 }
 .shita{
-    margin: 0px 0px 0px 215px
+    margin: 0px 0px 0px 215px;
+}
+.margin-top{
+    margin: 20px 0px 0px 0px;
 }
