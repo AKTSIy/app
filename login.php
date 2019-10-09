@@ -1,6 +1,11 @@
 <?php
 require_once('assets/assets/dbconnect.php');
-$caution=$_GET['caution'];
+if (isset($_GET['caution'])) {
+    $caution=$_GET['caution'];
+}else{
+    $caution=' ';
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +23,7 @@ $caution=$_GET['caution'];
     <h1>ご利用にはログインしていただく必要がございます</h1>
     <p class="red"><?php echo $caution;?></p>
     ユーザー名<br>
-    <form method="POST" action="submit_login.php">
+    <form method="POST" action="submit/submit_login.php">
     <!-- <form method="POST" action="submit_login.php"> -->
         <input type="text" name="user_name"><br>
         パスワード<br>

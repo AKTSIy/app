@@ -18,7 +18,7 @@ $thread_id = $_GET['thread_id'];
 </head>
 <body class="brown">
     <div class="padding">変更後、下記のボタンをクリックいてください</div>
-    <form action="submit_edit.php">
+    <form action="submit/submit_edit.php">
         <input type="text" name="text" class="padding margin yoko" value="<?php echo $text; ?>">
         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" >
         <input type="hidden" name="id" value="<?php echo $id; ?>" >

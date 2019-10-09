@@ -1,7 +1,7 @@
 <?php
 // ユーザー名を登録するためのファイル
 // DBに接続
-require_once('assets/assets/dbconnect.php');
+require_once('../assets/assets/dbconnect.php');
 // データを保存する
 $user_name = $_POST['user_name'];// nameがusernameを受け取る
 // var_dump($user_name, $_POST);die;
@@ -18,5 +18,5 @@ $stmt->execute();
 $results = $stmt->fetchAll();
 
 foreach ($results as $result) {
-    header("Location: index.php?user_id=$result[id]");//resultの中のidに''はいらないらしい
+    header("Location: ../index.php?user_id=$result[id]");//resultの中のidに''はいらないらしい
 }

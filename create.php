@@ -61,13 +61,13 @@ if (isset($_GET['success'])) {
             </form>
             
             <?php if (isset($already)) :?>
-                <form action="submit_unset_bookmark.php" class="margin">
+                <form action="submit/submit_unset_bookmark.php" class="margin">
                     <input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" >
                     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                     <button type="submit" class="btn btn-outline-light">ブックマーク解除</button>
                 </form>
             <?php else: ?>
-                <form action="submit_bookmark.php" class="margin">
+                <form action="submit/submit_bookmark.php" class="margin">
                     <input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" >
                     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                     <button type="submit" class="btn btn-outline-light">ブックマークする</button>
@@ -90,7 +90,7 @@ if (isset($_GET['success'])) {
 
         <p class="center"><?php echo 'ユーザー名：' . $result['name'] . '　' . $result['datetime']; ?></p>
         <p class="center"><?php echo '内容' . '<br>' . $result['content']; ?></p>
-        <p><?php if ($result['userid'] = $user_id) :?>
+        <p><?php if ($result['userid'] == $user_id) :?>
                 <form action="edit.php" class="center">
                     <button type="submit" class="btn btn-outline-info">編集する</button>
                     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
@@ -103,7 +103,7 @@ if (isset($_GET['success'])) {
     <?php endforeach; ?>
     <!-- ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー -->
     <?php foreach ($results1 as $result1) : ?>
-        <form method="POST" action="submit.php?user_id=<?php echo $user_id; ?>">
+        <form method="POST" action="submit/submit.php?user_id=<?php echo $user_id; ?>">
            <!-- ここhiddenじゃなくてもおくられてる謎 -->
             <div class="center">
                 内容<br>

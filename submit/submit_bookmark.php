@@ -1,5 +1,5 @@
 <?php
-require_once('assets/assets/dbconnect.php');
+require_once('../assets/assets/dbconnect.php');
 
 $user_id = $_GET['user_id'];
 $thread_id = $_GET['thread_id'];
@@ -15,5 +15,5 @@ foreach ($results as $result){
 $stmt = $dbh->prepare('INSERT INTO bookmark (thread_id, user_id, name) VALUES (?,?,?)');
 $stmt->execute([$thread_id, $user_id, $thread_name]);
 
-    header("Location: create.php?success=ブックマークしました&id=$thread_id&user_id=$user_id");//idとuser_idをおくる
+    header("Location: ../create.php?success=ブックマークしました&id=$thread_id&user_id=$user_id");//idとuser_idをおくる
 

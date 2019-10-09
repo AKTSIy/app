@@ -15,7 +15,7 @@ require_once('assets/assets/dbconnect.php');
 
 <body class="brown">
     <h2 class="center">ユーザー登録</h2>
-    <form method="POST" action="submit3.php">
+    <form method="POST" action="submit/submit3.php">
         <div class="center">
             ニックネーム<br>
             <input type="text" name="user_name">
