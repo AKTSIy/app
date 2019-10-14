@@ -16,7 +16,7 @@
     if (isset($_GET['name'])) {
         $name = $_GET['name'];
     }else{
-        $name ='';
+        $name =' 　 ';//検索してない時に何も表示したくない
     }
     $stmt2 = $dbh->prepare('SELECT * FROM threads WHERE name LIKE ?');
     $stmt2->execute(["%$name%"]);
