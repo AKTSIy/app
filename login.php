@@ -32,7 +32,7 @@ if (isset($_GET['caution'])) {
     </form>
     <h3>新規登録はこちら</h3>
     <form class="padding" action="user_registration.php">
-        <button type="submit" class="btn btn-outline-info">ユーザー登録</button>
+        <button type="submit" class="btn btn-outline-primary">ユーザー登録</button>
     </form>
 </body>
 
