@@ -20,7 +20,7 @@ if (isset($_GET['caution'])) {
 </head>
 
 <body class="brown">
-    <h1>ご利用にはログインしていただく必要がございます</h1>
+    <h1>ログインしてください</h1>
     <p class="red"><?php echo $caution;?></p>
     ユーザー名<br>
     <form method="POST" action="submit/submit_login.php">
