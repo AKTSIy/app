@@ -19,7 +19,7 @@ if (isset($_GET['caution'])) {
     <title>ログイン</title>
 </head>
 
-<body class="brown">
+<body class="brown center">
     <h1>ログインしてください</h1>
     <p class="red"><?php echo $caution;?></p>
     ユーザー名<br>
